@@ -1,0 +1,7 @@
+people_detection_node:
+  ros__parameters:
+    is_debug_mode: false
+    trained_model_path: "/yolact/yolact/weights/yolact_darknet53_54_800000.pth"
+    score_threshold: 0.3
+    is_image_compressed: true
+    image_node: "/rs/color/compressed"
