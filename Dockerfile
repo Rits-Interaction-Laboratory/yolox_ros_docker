@@ -65,8 +65,6 @@ RUN /root/.pyenv/versions/3.6.8/bin/pip install cython numpy && \
     /root/.pyenv/versions/3.6.8/bin/pip install opencv-python pycocotools empy lark_parser catkin-pkg colcon-common-extensions
 RUN /root/.pyenv/versions/3.6.8/bin/pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 
-
-
 COPY ./run.bash /run.bash
 
 # setup yolact
@@ -76,9 +74,21 @@ ENV PYTHONPATH /yolact:$PYTHONPATH
 # setup people_detection_ros2
 COPY ./ros2_ws /ros2_ws
 COPY ./params.yml /params.yml
-RUN rm -rf /opt/conda && \
-    . /opt/ros/dashing/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.6.8/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
+RUN rm -rf /opt/conda 
+RUN . /opt/ros/dashing/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.6.8/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
+    echo "# ROS2 Settings" >> ~/.bashrc && \
     . install/setup.sh && echo "source /opt/ros/dashing/setup.bash" >> ~/.bashrc && \
     echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
+
+# install powerline-shell
+RUN /root/.pyenv/versions/3.6.8/bin/pip install powerline-shell
+RUN mkdir -p /root/Programs/Settings && \
+    touch /root/Programs/Settings/powerlineSetup_CRLF.txt && \
+    touch /root/Programs/Settings/powerlineSetup.txt 
+COPY settings/powerline/powerlineSetup.txt /root/Programs/Settings/powerlineSetup_CRLF.txt
+RUN sed "s/\r//g" /root/Programs/Settings/powerlineSetup_CRLF.txt > /root/Programs/Settings/powerlineSetup.txt && \
+    cat /root/Programs/Settings/powerlineSetup.txt >> /root/.bashrc
+RUN mkdir -p /root/.config/powerline-shell 
+COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
 
 CMD ["/bin/bash"]
