@@ -69,6 +69,14 @@ COPY ./run.bash /run.bash
 
 # setup yolact
 COPY ./yolact /yolact
+RUN cd /yolact && \
+    git clone https://github.com/dbolya/yolact.git
+RUN mkdir -p /yolact/yolact/weights
+COPY /settings/model_dl.sh /yolact/yolact/weights/model_dl.sh
+RUN cd /yolact/yolact/weights && \ 
+    sh model_dl.sh
+COPY /settings/change_yolact_path.sh /change_yolact_path.sh
+RUN sh /change_yolact_path.sh
 ENV PYTHONPATH /yolact:$PYTHONPATH
 
 # setup people_detection_ros2
