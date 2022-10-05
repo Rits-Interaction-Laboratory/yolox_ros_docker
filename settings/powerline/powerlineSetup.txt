@@ -1,6 +1,6 @@
 # powerline setup
 function _update_ps1() {
-  PS1=$(/root/.pyenv/versions/3.6.8/bin/powerline-shell $?)
+  PS1=$(/root/.pyenv/versions/3.8.12/bin/powerline-shell $?)
 }
 
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
