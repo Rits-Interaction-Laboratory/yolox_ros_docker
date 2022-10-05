@@ -56,7 +56,7 @@ RUN apt-get -y update && \
     apt-get -y install python3.8-dev
 RUN /root/.pyenv/versions/3.8.12/bin/pip install cython numpy && \
     /root/.pyenv/versions/3.8.12/bin/pip install opencv-python pillow pycocotools empy lark_parser catkin-pkg colcon-common-extensions
-RUN /root/.pyenv/versions/3.8.12/bin/pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+RUN /root/.pyenv/versions/3.8.12/bin/pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 COPY ./run.bash /run.bash
 
 
