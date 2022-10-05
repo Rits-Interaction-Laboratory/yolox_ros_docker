@@ -1,10 +1,43 @@
 # people_detection_ros2_docker
 
-このリポジトリは2つの外部リポジトリに依存しています <br>
+[Shigure](https://github.com/Rits-Interaction-Laboratory/shigure_core)の人物領域検出機能である[people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)のコンテナ環境
+
+## 必要なリポジトリ
+
+---
+
  - [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
  - [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
 
+
+## Shigure関連
+
+---
+
+Shigureに関する情報 : https://github.com/Rits-Interaction-Laboratory/shigure_core/wiki
+
+
+### ソースコード
+
+カメラ映像
+- [rs_ros2_python](https://github.com/Rits-Interaction-Laboratory/rs_ros2_python)
+
+
+人物骨格推定
+- [openpose_ros2](https://github.com/Rits-Interaction-Laboratory/openpose_ros2)
+    - [openpose_ros2_docker](https://github.com/Rits-Interaction-Laboratory/openpose_ros2_docker)
+
+人物領域推定
+- [people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
+  - [people_detection_ros2_docker(本リポジトリ)](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2_docker)
+
+イベント検出
+- [shigure_core](https://github.com/Rits-Interaction-Laboratory/shigure_core)
+
+
 ## 導入
+
+---
 
 以下コマンドを実行 : <br>
 
@@ -21,46 +54,9 @@ cd ~/people_detection_ros2_docker/ros2_ws/src/people_detection_ros2
 git clone git@github.com:Rits-Interaction-Laboratory/people_detection_ros2.git
 ```
 
-**yolactのclone** <br>
-
-```
-cd ~/people_detection_ros2_docker/yolact
-git clone git@github.com:dbolya/yolact.git
-```
-
-### yolactの設定
-
-**重みファイルの作成** <br>
-
-```
-cd ~/people_detection_ros2_docker/yolact/yolact
-mkdir weights
-# ダウンロードしてきた yolact_darknet53_54_800000.pth をweights直下に配置
-```
-
-**import時のpath変更** <br>
-
-`from data.config import cfg, mask_type` <br>
-のようになっている部分を <br>
-`from yolact.data.config import cfg, mask_type` <br>
-といったように先頭に `yolact` をつける必要がある <br>
-変更対象ファイルは以下の通り : <br>
-
-```
-data/config.py
-
-layers/functions/detection.py
-layers/modeles/multibox_loss.py
-layers/box_utils.py
-layers/output_utils.py
-
-utils/augmentations.py
-utils/functions.py
-
-yolact.py
-```
-
 ## 実行
+
+---
 
 以下コマンドを実行 : <br>
 
@@ -69,12 +65,8 @@ yolact.py
 $ docker build -t people_detection_ros2_docker .
 
 # コンテナに入る
-$ docker run -it --gpus all --net host people_detection_ros2_docker
+$ docker run -it --gpus all --net host people_detection_ros2_docker:latest
 
 # dockerコンテナ内にて実行
 $ bash /run.bash
 ```
-
-## その他
-
-2021/07/26 rubidium内よりアップロード
