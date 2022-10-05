@@ -34,8 +34,8 @@ RUN apt-get -y update && \
      eval "$(pyenv init -)"
  RUN CFLAGS=-I/usr/include \
      LDFLAGS=-L/usr/lib \
-     env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install -v 3.8.10 && \
-     pyenv global 3.8.10
+     env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install -v 3.8.12 && \
+     pyenv global 3.8.12
 
 
 # -----Install ROS2-----
@@ -43,7 +43,7 @@ RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt
     sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list' && \
     apt-get update && apt-get install -y ros-$ROS2_DISTRO-desktop && \ 
     # python3-colcon-common-extensions && \
-    /root/.pyenv/versions/3.8.10/bin/pip install --upgrade pip && pip install -U argcomplete
+    /root/.pyenv/versions/3.8.12/bin/pip install --upgrade pip && pip install -U argcomplete
 
 
 # -----Install ROS2 plugin-----
@@ -51,12 +51,12 @@ RUN apt-get install -y ros-$ROS2_DISTRO-cv-bridge
 
 
 # -----Install python packages-----
-ENV PYTHONPATH /root/.pyenv/versions/3.8.10/lib/python3.8/site-packages/:$PYTHONPATH
+ENV PYTHONPATH /root/.pyenv/versions/3.8.12/lib/python3.8/site-packages/:$PYTHONPATH
 RUN apt-get -y update && \
     apt-get -y install python3.8-dev
-RUN /root/.pyenv/versions/3.8.10/bin/pip install cython numpy && \
-    /root/.pyenv/versions/3.8.10/bin/pip install opencv-python pillow pycocotools empy lark_parser catkin-pkg colcon-common-extensions
-RUN /root/.pyenv/versions/3.8.10/bin/pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+RUN /root/.pyenv/versions/3.8.12/bin/pip install cython numpy && \
+    /root/.pyenv/versions/3.8.12/bin/pip install opencv-python pillow pycocotools empy lark_parser catkin-pkg colcon-common-extensions
+RUN /root/.pyenv/versions/3.8.12/bin/pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 COPY ./run.bash /run.bash
 
 
@@ -77,7 +77,7 @@ ENV PYTHONPATH /yolact:$PYTHONPATH
 COPY ./ros2_ws /ros2_ws
 COPY ./params.yml /params.yml
 RUN rm -rf /opt/conda 
-RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.8.10/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
+RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.8.12/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
     echo "# ROS2 Settings" >> ~/.bashrc && \
     . install/setup.sh && echo "source /opt/ros/$ROS2_DISTRO/setup.bash" >> ~/.bashrc && \
     echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
@@ -94,7 +94,7 @@ RUN sed "s/\r//g" /root/Programs/Settings/rosSetup_CRLF.txt > /root/Programs/Set
 
 
 # -----Install powerline-shell-----
-RUN /root/.pyenv/versions/3.8.10/bin/pip install powerline-shell
+RUN /root/.pyenv/versions/3.8.12/bin/pip install powerline-shell
 RUN mkdir -p /root/Programs/Settings && \
     touch /root/Programs/Settings/powerlineSetup_CRLF.txt && \
     touch /root/Programs/Settings/powerlineSetup.txt 
