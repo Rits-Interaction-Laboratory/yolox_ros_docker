@@ -57,7 +57,7 @@ RUN apt-get -y update && \
 RUN /root/.pyenv/versions/3.8.12/bin/pip install cython numpy && \
     /root/.pyenv/versions/3.8.12/bin/pip install opencv-python pillow pycocotools empy lark_parser catkin-pkg colcon-common-extensions
 RUN /root/.pyenv/versions/3.8.12/bin/pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
-COPY ./run.bash /run.bash
+COPY settings/shigure/run.bash /run.bash
 
 
 # -----Setup yolact-----
@@ -74,8 +74,9 @@ ENV PYTHONPATH /yolact:$PYTHONPATH
 
 
 # -----Setup people_detection_ros2-----
-COPY ./ros2_ws /ros2_ws
-COPY ./params.yml /params.yml
+RUN mkdir -p /ros2_ws/src
+COPY people_detection_ros2/ /ros2_ws_src/people_detection_ros2
+COPY settings/shigure/params.yml /params.yml
 RUN rm -rf /opt/conda 
 RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.8.12/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
     echo "# ROS2 Settings" >> ~/.bashrc && \
@@ -84,13 +85,11 @@ RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pye
 
 
 # -----Personal ROS settings-----
-RUN echo "-----Personal ROS settings-----"
-RUN mkdir -p /root/Programs/Settings
-COPY settings/ros/.ros_config /.ros_config
-COPY settings/ros/rosSetup.txt  /root/Programs/Settings/rosSetup_CRLF.txt
-RUN sed "s/\r//g" /root/Programs/Settings/rosSetup_CRLF.txt > /root/Programs/Settings/rosSetup.txt && \
-    cat /root/Programs/Settings/rosSetup.txt >> /root/.bashrc && \
-    echo "" >> /root/.bashrc
+# setup shigure_tool
+COPY settings/shigure/shigure_tool_setup.txt /root/Programs/Settings/shigure_tool_setup.txt
+RUN cd / && \
+    git clone https://github.com/Rits-Interaction-Laboratory/shigure_tools.git
+RUN cat /root/Programs/Settings/shigure_tool_setup.txt >> /root/.bashrc
 
 
 # -----Install powerline-shell-----
