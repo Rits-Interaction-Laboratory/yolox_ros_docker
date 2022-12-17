@@ -99,6 +99,7 @@ RUN mkdir -p /root/Programs/Settings && \
     touch /root/Programs/Settings/powerlineSetup.txt 
 COPY settings/powerline/powerlineSetup.txt /root/Programs/Settings/powerlineSetup_CRLF.txt
 RUN sed "s/\r//g" /root/Programs/Settings/powerlineSetup_CRLF.txt > /root/Programs/Settings/powerlineSetup.txt && \
+    echo "" >> ~/.bashrc && \
     cat /root/Programs/Settings/powerlineSetup.txt >> /root/.bashrc
 RUN mkdir -p /root/.config/powerline-shell 
 COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
