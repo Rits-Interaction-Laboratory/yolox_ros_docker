@@ -1,72 +1,47 @@
-# people_detection_ros2_docker
+# People Detection ROS2 Docker
 
-[Shigure](https://github.com/Rits-Interaction-Laboratory/shigure_core)の人物領域検出機能である[people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)のコンテナ環境
+![people_detection_docker](https://img.shields.io/badge/people_detection_ros2-docker-blue)
 
-## 必要なリポジトリ
+en / [ja](./README_ja.md)
 
----
+This repository provides an environment for running people_detection_ros2 in a Docker container.
 
- - [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
- - [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
-
-
-## Shigure関連
-
----
-
-Shigureに関する情報 : https://github.com/Rits-Interaction-Laboratory/shigure_core/wiki
+The following packages this repository depends on :
+- [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
+- [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
 
 
-### ソースコード
-
-カメラ映像
-- [rs_ros2_python](https://github.com/Rits-Interaction-Laboratory/rs_ros2_python)
-
-
-人物骨格推定
-- [openpose_ros2](https://github.com/Rits-Interaction-Laboratory/openpose_ros2)
-    - [openpose_ros2_docker](https://github.com/Rits-Interaction-Laboratory/openpose_ros2_docker)
-
-人物領域推定
-- [people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
-  - [people_detection_ros2_docker(本リポジトリ)](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2_docker)
-
-イベント検出
-- [shigure_core](https://github.com/Rits-Interaction-Laboratory/shigure_core)
-
-
-## 導入
+## Required
 
 ---
 
-以下コマンドを実行 : <br>
+- Docker
 
-**people_detection_ros2_dockerのclone** <br>
 
-```
-git clone git@github.com:Rits-Interaction-Laboratory/people_detection_ros2_docker.git
-```
-
-**people_detection_ros2のclone** <br>
-
-```
-cd ~/people_detection_ros2_docker/ros2_ws/src/people_detection_ros2
-git clone git@github.com:Rits-Interaction-Laboratory/people_detection_ros2.git
-```
-
-## 実行
+## Building
 
 ---
 
-以下コマンドを実行 : <br>
-
+Getting Dependent Packages :
+```bash
+bash startup.sh
 ```
-# 以下ビルドコマンドは初回および変更時に実行
-$ docker build -t people_detection_ros2_docker .
 
-# コンテナに入る
-$ docker run -it --gpus all --net host people_detection_ros2_docker:latest
+Creating Docker Image :
+```bash
+docker build -t people_detection_ros2_docker .
+```
 
-# dockerコンテナ内にて実行
-$ bash /run.bash
+Creating Docker container :
+```bash
+docker run -it --name ${container name} --gpus all --net host people_detection_ros2_docker:latest
+```
+
+## Run node
+
+---
+
+Run the following in the docker container :
+```bash
+bash /run.bash
 ```
