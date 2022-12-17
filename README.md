@@ -9,6 +9,7 @@ This repository provides an environment for running people_detection_ros2 in a D
 The following packages this repository depends on :
 - [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
 - [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
+- [Rits-Interaction-Laboratory/shigure_tools](https://github.com/Rits-Interaction-Laboratory/shigure_tools)
 
 
 ## Required

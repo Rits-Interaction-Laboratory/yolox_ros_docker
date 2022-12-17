@@ -9,6 +9,7 @@
 このリポジトリが依存するパッケージは以下の通りです :
 - [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
 - [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
+- [Rits-Interaction-Laboratory/shigure_tools](https://github.com/Rits-Interaction-Laboratory/shigure_tools)
 
 
 ## 動作要件
