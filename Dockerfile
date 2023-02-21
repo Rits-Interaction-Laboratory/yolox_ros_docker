@@ -105,5 +105,9 @@ RUN mkdir -p /root/.config/powerline-shell
 COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
 
 
+#-----Install YOLOX-ROS-----
+
+
+
 # -----Start setting-----
 CMD ["/bin/bash"]
