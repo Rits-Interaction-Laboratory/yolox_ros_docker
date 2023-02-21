@@ -30,19 +30,19 @@ bash startup.sh
 
 Creating Docker Image :
 ```bash
-docker build -t people_detection_ros2_docker .
+docker build -t yolox_ros_docker .
 ```
 
 Creating Docker container :
 ```bash
-docker run -it --name ${container name} --gpus all --net host people_detection_ros2_docker:latest
+docker run -it --name ${container name} --gpus all --net host yolox_ros_docker:latest
 ```
 
 ## Run node
 
 ---
 
-Run the following in the docker container :
+Run the yolox-ros :
 ```bash
-bash /run.bash
+ros2 launch yolox_ros_py yolox_nano_torch_gpu_camera.launch.py
 ```
