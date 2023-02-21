@@ -107,9 +107,10 @@ COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
 
 #-----Setup YOLOX-----
 RUN mkdir -p /yolox
-RUN cd /yolox
-
-
+RUN cd yolox && \
+    git clone https://github.com/Megvii-BaseDetection/YOLOX.git
+RUN cd YOLOX && \
+    pip install -v -e .
 
 
 #-----Setup YOLOX-ROS-----
