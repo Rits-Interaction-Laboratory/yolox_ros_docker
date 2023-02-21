@@ -1,4 +1,4 @@
-# People Detection ROS2 Docker
+# YOLOX-ROS Docker
 
 ![people_detection_docker](https://img.shields.io/badge/people_detection_ros2-docker-blue)
 
