@@ -107,17 +107,23 @@ COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
 
 #-----Setup YOLOX-----
 RUN mkdir -p /yolox
-RUN cd yolox && \
+RUN cd /yolox && \
     git clone https://github.com/Megvii-BaseDetection/YOLOX.git
 RUN cd YOLOX && \
     pip install -v -e .
+COPY 
 
 
 #-----Setup YOLOX-ROS-----
-
-
-
-
+RUN cd /ros2_ws/src && \
+    git clone https://github.com/Ar-Ray-code/yolox_ros.git --recursive
+RUN apt-get update && apt install ros-foxy-v4l2-camera
+COPY 
+COPY 
+COPY 
+COPY 
+RUN cd /ros2_ws && colcon build --symlink-install && source /opt/ros/foxy/setup.bash && . ./install/setup.bash
+    
 
 # -----Start setting-----
 CMD ["/bin/bash"]
