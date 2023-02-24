@@ -111,17 +111,17 @@ RUN cd /yolox && \
     git clone https://github.com/Megvii-BaseDetection/YOLOX.git
 RUN cd YOLOX && \
     pip install -v -e .
-COPY 
+COPY settings/YOLOX-ROS/coco_classes.py /yolox/YOLOX/yolox/data/datasets/coco_classes.py
 
 
 #-----Setup YOLOX-ROS-----
 RUN cd /ros2_ws/src && \
     git clone https://github.com/Ar-Ray-code/yolox_ros.git --recursive
 RUN apt-get update && apt install ros-foxy-v4l2-camera
-COPY 
-COPY 
-COPY 
-COPY 
+COPY settings/YOLOX-ROS/my_exp_yolox_x.py /ros2_ws/src/yolox_ros/yolox_ros_py/exps/my_exp_yolox_x.py
+COPY settings/YOLOX-ROS/yolox_nano_torch_gpu_camera.launch.py /ros2_ws/src/yolox_ros/yolox_ros_py/launch/yolox_nano_torch_gpu_camera.launch.py
+COPY settings/YOLOX-ROS/yolox_ros.py /ros2_ws/src/yolox_ros/yolox_ros_py/yolox_ros.py
+COPY settings/YOLOX-ROS/best_ckpt1.pth /ros2_ws/src/yolox_ros/weights/best_ckpt1.pth
 RUN cd /ros2_ws && colcon build --symlink-install && source /opt/ros/foxy/setup.bash && . ./install/setup.bash
     
 
