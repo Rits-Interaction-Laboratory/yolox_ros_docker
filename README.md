@@ -50,6 +50,11 @@ colcon build
 . ./install/setup.bash
 ```
 
+## If you get an error message "TypeError: __init__() got an unexpected keyword argument 'encoding'"
+
+---
+
+-
 
 ## Run node
 
