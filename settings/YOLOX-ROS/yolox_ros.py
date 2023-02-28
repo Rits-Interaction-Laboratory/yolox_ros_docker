@@ -152,7 +152,7 @@ class yolox_ros(yolox_py):
         # --tsize -> resize
         self.declare_parameter('resize', 640)
         
-        self.declare_parameter('sensor_qos_mode', False)
+        self.declare_parameter('sensor_qos_mode', True)
 
         # =============================================================
         self.imshow_isshow = self.get_parameter('imshow_isshow').value
