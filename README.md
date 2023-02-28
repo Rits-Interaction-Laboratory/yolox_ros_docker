@@ -77,8 +77,9 @@ vi package_xml_2_cmake.py
 ## If you get an error message "ModuleNotFoundError: No module named '○○○○○' "
 
 ---
+```bash
 - pip install ○○○○○ 
-
+```
 
 ## Run node
 
