@@ -46,7 +46,7 @@ docker run -it --name ${container name} --gpus all --net host yolox_ros_docker:l
 ```bash
 source /opt/ros/foxy/setup.bash
 cd /ros2_ws
-colcon build
+colcon build --symlink-install
 . ./install/setup.bash
 ```
 **Install ros-foxy-v4l2-camera**
