@@ -54,15 +54,15 @@ colcon build
 
 ---
 
--Go to directory
+- Go to directory
 ```bash
 cd /opt/ros/foxy/share/ament_cmake_core/cmake/core
 ```
--Open File "package_xml_2_cmake.py"
+- Open File "package_xml_2_cmake.py"
 ```bash
 vi package_xml_2_cmake.py
 ```
--Change type=argparse.FileType('r', encoding='utf-8') to type=argparse.FileType('r')
+- Change type=argparse.FileType('r', encoding='utf-8') to type=argparse.FileType('r')
 
 
 ## Run node
