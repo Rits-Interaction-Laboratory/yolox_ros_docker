@@ -8,7 +8,8 @@ This repository provides an environment for running people_detection_ros2 in a D
 
 The following packages this repository depends on :
 - [dbolya/yolact](https://github.com/dbolya/yolact/tree/master)
-- [Rits-Interaction-Laboratory/people_detection_ros2](https://github.com/Rits-Interaction-Laboratory/people_detection_ros2)
+- [Megvii-BaseDetection/YOLOX](https://github.com/Megvii-BaseDetection/YOLOX.git)
+- [Ar-Ray-code/YOLOX-ROS](https://github.com/Ar-Ray-code/YOLOX-ROS.git)
 - [Rits-Interaction-Laboratory/shigure_tools](https://github.com/Rits-Interaction-Laboratory/shigure_tools)
 
 
@@ -37,6 +38,18 @@ Creating Docker container :
 ```bash
 docker run -it --name ${container name} --gpus all --net host yolox_ros_docker:latest
 ```
+
+##After creating container :
+
+---
+
+```bash
+source /opt/ros/foxy/setup.bash
+cd /ros2_ws
+colcon build
+. ./install/setup.bash
+```
+
 
 ## Run node
 
