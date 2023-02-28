@@ -50,9 +50,9 @@ colcon build
 . ./install/setup.bash
 ```
 
-- Setting Weights
-File Location:Z:/aarimoto/best_ckpt1.zip
-Put the weight in /ros2/src/yolox_ros/weights
+**Setting Weights**
+- File Location:Z:/aarimoto/best_ckpt1.zip
+- Put the weight in /ros2/src/yolox_ros/weights
 
 
 ## If you get an error message "TypeError: __init__() got an unexpected keyword argument 'encoding'"
