@@ -79,9 +79,9 @@ RUN mkdir -p /ros2_ws/src
 #COPY settings/shigure/params.yml /params.yml
 #RUN rm -rf /opt/conda 
 #RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.8.12/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
-    echo "# ROS2 Settings" >> ~/.bashrc && \
-    . install/setup.sh && echo "source /opt/ros/$ROS2_DISTRO/setup.bash" >> ~/.bashrc && \
-    echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
+    #echo "# ROS2 Settings" >> ~/.bashrc && \
+    #. install/setup.sh && echo "source /opt/ros/$ROS2_DISTRO/setup.bash" >> ~/.bashrc && \
+    #echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
 
 
 # -----Personal ROS settings-----
