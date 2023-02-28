@@ -124,7 +124,7 @@ COPY settings/YOLOX-ROS/yolox_ros.py /ros2_ws/src/yolox_ros/yolox_ros_py/yolox_r
 #COPY settings/YOLOX-ROS/best_ckpt1.pth /ros2_ws/src/yolox_ros/weights/best_ckpt1.pth
 RUN cd /ros2_ws/src/yolox_ros/weights && \
     wget https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_x.pth
-RUN cd /ros2_ws && colcon build --symlink-install && source /opt/ros/foxy/setup.bash && . ./install/setup.bash
+#RUN cd /ros2_ws && colcon build --symlink-install && source /opt/ros/foxy/setup.bash && . ./install/setup.bash
     
 
 # -----Start setting-----
