@@ -120,7 +120,7 @@ RUN cd /ros2_ws/src && \
 #RUN apt-get update && apt install ros-foxy-v4l2-camera
 COPY settings/YOLOX-ROS/my_exp_yolox_x.py /ros2_ws/src/yolox_ros/yolox_ros_py/exps/my_exp_yolox_x.py
 COPY settings/YOLOX-ROS/yolox_nano_torch_gpu_camera.launch.py /ros2_ws/src/yolox_ros/yolox_ros_py/launch/yolox_nano_torch_gpu_camera.launch.py
-COPY settings/YOLOX-ROS/yolox_ros.py /ros2_ws/src/yolox_ros/yolox_ros_py/yolox_ros.py
+COPY settings/YOLOX-ROS/yolox_ros.py /ros2_ws/src/yolox_ros/yolox_ros_py/yolox_ros_py/yolox_ros.py
 #COPY settings/YOLOX-ROS/best_ckpt1.pth /ros2_ws/src/yolox_ros/weights/best_ckpt1.pth
 RUN cd /ros2_ws/src/yolox_ros/weights && \
     wget https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_x.pth
