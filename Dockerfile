@@ -109,7 +109,7 @@ COPY settings/powerline/config.json /root/.config/powerline-shell/config.json
 RUN mkdir -p /yolox
 RUN cd /yolox && \
     git clone https://github.com/Megvii-BaseDetection/YOLOX.git
-RUN cd YOLOX && \
+RUN cd /yolox/YOLOX && \
     pip install -v -e .
 COPY settings/YOLOX-ROS/coco_classes.py /yolox/YOLOX/yolox/data/datasets/coco_classes.py
 
