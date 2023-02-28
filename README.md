@@ -49,6 +49,11 @@ cd /ros2_ws
 colcon build
 . ./install/setup.bash
 ```
+**Install ros-foxy-v4l2-camera**
+```bash
+apt-get update
+apt install ros-foxy-v4l2-camera
+```
 
 **Setting Weights**
 - File Location:Z:/aarimoto/best_ckpt1.zip
