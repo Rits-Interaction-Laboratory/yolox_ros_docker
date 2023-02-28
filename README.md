@@ -56,7 +56,7 @@ apt install ros-foxy-v4l2-camera
 ```
 
 **Setting Weights**
-- File Location:Z:/aarimoto/best_ckpt1.zip
+- File Location: Z:/aarimoto/best_ckpt1.zip
 - Put the weight in /ros2/src/yolox_ros/weights
 
 
