@@ -78,7 +78,7 @@ vi package_xml_2_cmake.py
 
 ---
 ```bash
-- pip install ○○○○○ 
+pip install ○○○○○ 
 ```
 
 ## Run node
