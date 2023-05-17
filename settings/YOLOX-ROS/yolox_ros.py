@@ -23,6 +23,7 @@ from .yolox_ros_py_utils.utils import yolox_py
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 
 from std_msgs.msg import Header
 from cv_bridge import CvBridge
@@ -48,6 +49,9 @@ class Predictor(object):
         self.device = device
         self.fp16 = fp16
         self.preproc = ValTransform(legacy=legacy)
+        #shigure_qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
+
+
         if trt_file is not None:
             from torch2trt import TRTModule
 
@@ -244,11 +248,13 @@ class yolox_ros(yolox_py):
                 self.pub.publish(bboxes_msg)
 
                 if (self.imshow_isshow):
+                    cv2.namedWindow("YOLOX",cv2.WINDOW_NORMAL)
                     cv2.imshow("YOLOX",result_img_rgb)
                     cv2.waitKey(1)
 
             except Exception as e:
                 if (self.imshow_isshow):
+                    cv2.namedWindow("YOLOX", cv2.WINDOW_NORMAL)
                     cv2.imshow("YOLOX",img_rgb)
                     cv2.waitKey(1)
         except Exception as e:
@@ -269,4 +275,3 @@ def ros_main(args = None):
     
 if __name__ == "__main__":
     ros_main()
-
