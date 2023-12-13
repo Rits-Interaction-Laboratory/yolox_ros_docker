@@ -41,14 +41,14 @@ RUN apt-get -y update && \
 # -----Install ROS2-----
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
     sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list' && \
-    apt-get update && apt-get install -y ros-$ROS2_DISTRO-desktop && \ 
+    apt-get update && apt-get install -y ros-$ROS2_DISTRO-desktop ros-dev-tools&& \ 
     # python3-colcon-common-extensions && \
-    /root/.pyenv/versions/3.8.12/bin/pip install --upgrade pip && pip install -U argcomplete
+    /root/.pyenv/versions/3.8.12/bin/pip install --upgrade pip==22.2.2 && pip install -U argcomplete
 
 
 # -----Install ROS2 plugin-----
 RUN apt-get install -y ros-$ROS2_DISTRO-cv-bridge
-
+RUN apt-get install -y ros-$ROS2_DISTRO-v4l2-camera
 
 # -----Install python packages-----
 ENV PYTHONPATH /root/.pyenv/versions/3.8.12/lib/python3.8/site-packages/:$PYTHONPATH
@@ -73,15 +73,8 @@ RUN sh /change_yolact_path.sh
 ENV PYTHONPATH /yolact:$PYTHONPATH
 
 
-# -----Setup people_detection_ros2-----
+# -----Make ros2 workspace-----
 RUN mkdir -p /ros2_ws/src
-#COPY people_detection_ros2/ /ros2_ws/src/people_detection_ros2
-#COPY settings/shigure/params.yml /params.yml
-#RUN rm -rf /opt/conda 
-#RUN . /opt/ros/$ROS2_DISTRO/setup.sh && cd /ros2_ws  && /bin/bash -c "/root/.pyenv/versions/3.8.12/bin/python3 -m colcon build --base-paths src/people_detection_ros2" && \
-    #echo "# ROS2 Settings" >> ~/.bashrc && \
-    #. install/setup.sh && echo "source /opt/ros/$ROS2_DISTRO/setup.bash" >> ~/.bashrc && \
-    #echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc
 
 
 # -----Personal ROS settings-----
@@ -110,22 +103,24 @@ RUN mkdir -p /yolox
 RUN cd /yolox && \
     git clone https://github.com/Megvii-BaseDetection/YOLOX.git
 RUN cd /yolox/YOLOX && \
-    pip install -v -e .
+    /root/.pyenv/versions/3.8.12/bin/pip install -v -e .
 COPY settings/YOLOX-ROS/coco_classes.py /yolox/YOLOX/yolox/data/datasets/coco_classes.py
 
 
 #-----Setup YOLOX-ROS-----
 RUN cd /ros2_ws/src && \
-    git clone https://github.com/Ar-Ray-code/yolox_ros.git --recursive
-#RUN apt-get update && apt install ros-foxy-v4l2-camera
+    git clone --recursive https://github.com/Ar-Ray-code/yolox_ros.git
+COPY settings/YOLOX-ROS/package_xml_2_cmake.py /opt/ros/foxy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
 COPY settings/YOLOX-ROS/my_exp_yolox_x.py /ros2_ws/src/yolox_ros/yolox_ros_py/exps/my_exp_yolox_x.py
 COPY settings/YOLOX-ROS/yolox_nano_torch_gpu_camera.launch.py /ros2_ws/src/yolox_ros/yolox_ros_py/launch/yolox_nano_torch_gpu_camera.launch.py
 COPY settings/YOLOX-ROS/yolox_ros.py /ros2_ws/src/yolox_ros/yolox_ros_py/yolox_ros_py/yolox_ros.py
 #COPY settings/YOLOX-ROS/best_ckpt1.pth /ros2_ws/src/yolox_ros/weights/best_ckpt1.pth
 RUN cd /ros2_ws/src/yolox_ros/weights && \
     wget https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_x.pth
-#RUN cd /ros2_ws && colcon build --symlink-install && source /opt/ros/foxy/setup.bash && . ./install/setup.bash
-    
+RUN /root/.pyenv/versions/3.8.12/bin/pip install loguru
+RUN mv /ros2_ws/src/yolox_ros/yolox_ros_py/package.xml.old /ros2_ws/src/yolox_ros/yolox_ros_py/package.xml && mv /ros2_ws/src/yolox_ros/yolox_ros_py/setup.py.old /ros2_ws/src/yolox_ros/yolox_ros_py/setup.py
+#RUN cd /ros2_ws && source /opt/ros/foxy/setup.sh && /bin/bash -c "colcon build --symlink-install --packages-select yolox_ros_py bboxes_ex_msgs" && . ./install/setup.bash 
+
 
 # -----Start setting-----
 CMD ["/bin/bash"]
